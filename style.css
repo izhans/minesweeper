@@ -1,68 +1,73 @@
-.container {
-  width: 500px;
-  align-content: center;
+:root
+{
+	--text: #ffffff;
+  --numbers-size: 1.5em; /* 24px */
+	--bg: #111;
+  /* grid */
+  --grid-size: 400px;
+  --grid-border-color: #dcd6bc;
+  /* squares */
+  --square-size: 40px;
+	--square-border: 5px solid;
+  --square-border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
+  --checked-bg: #cecab7;
+  --checked-border: #9c998d;
+  /* numbers */
+  --one: #e76346;
+  --two: #4199d3;
+  --three: #57da59;
+  --four: #bb41d3;
+  --win: var(--one);
+}
+
+body
+{
+	height: 100vh;
+  font-family: 'Roboto Mono', monospace;
+	background: var(--bg);
+	color: var(--text);
 }
 
 .grid {
-  height: 400px;
-  width: 400px;
+  height: var(--grid-size);
+  width: var(--grid-size);
   display: flex;
   flex-wrap: wrap;
-  background-color: #dcd6bc;
-  margin-left: 50px;
-  margin-top: 20px;
-  border: 10px solid #dcd6bc;
-  margin-bottom: 10px;
+  background: var(--grid-border-color);
+  border: 10px solid var(--grid-border-color);
 }
 
-div {
-  font-size: 25px;
+.grid div {
+  height: var(--square-size);
+  width: var(--square-size);
+  border: var(--square-border);
+  border-color: var(--square-border-color);
+  box-sizing: border-box;
+  font-size: var(--numbers-size);
   text-align: center;
-  font-family: 'Roboto Mono', monospace;
-
-}
-.valid {
-  height: 40px;
-  width: 40px;
-  border: 5px solid;
-  border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
-  box-sizing: border-box;
 }
 
-.checked {
-  height: 40px;
-  width: 40px;
-  border: 2px solid;
-  background-color: #cecab7;
-  border-color: #9c998d;
-  box-sizing: border-box;
-}
-
-.bomb {
-  height: 40px;
-  width: 40px;
-  border: 5px solid;
-  border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
-  box-sizing: border-box;
+.grid div.checked {
+  border: 2px solid var(--checked-border);
+  background: var(--checked-bg);
 }
 
 .one {
-  color: #e76346;
+  color: var(--one);
 }
 
 .two {
-  color: #4199d3;
+  color: var(--two);
 }
 
 .three {
-  color: #57da59;
+  color: var(--three);
 }
 
 .four{
-  color: #bb41d3;
+  color: var(--four);
 }
 
-#result {
-  margin-top: 5px;
-  color: #e76346;
+#result { 
+  color: var(--win);
 }
