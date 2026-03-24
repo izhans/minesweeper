@@ -9,11 +9,28 @@
 </head>
 <body>
 
-  <div class="container">
-    <div class="grid"></div>
-    <div>Flags left: <span id='flags-left'></span></div>
-    <div id="result"></div>
-  </div>
+  <div id="layout">
 
+    <h1>Minesweeper</h1>
+
+    <div id="levels">
+      <button class="level selected" data-level="0">Easy 😎</button>
+      <button class="level" data-level="1">Mid 😮</button>
+      <button class="level" data-level="2">Hard 😡</button>
+      <button class="level" data-level="3">Hell 💀</button>
+    </div>
+
+    <div class="grid"></div>
+    <div>Flags left: <span id='flags-left'></span>/<span id='total-flags'></span></div>
+    <div id="result"></div>
+    
+    <div id="controls">
+        <h2>Controls</h2>
+        <p>🪏 click - discover square</p>
+        <p>🚩 right click - flag square</p>
+        <p>❔ try and discover more</p>
+    </div>
+    
+  </div>
 </body>
 </html>

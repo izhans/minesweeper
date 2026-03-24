@@ -1,31 +1,60 @@
-:root
-{
+:root {
 	--text: #ffffff;
   --numbers-size: 1.5em; /* 24px */
 	--bg: #111;
   /* grid */
   --grid-size: 400px;
-  --grid-border-color: #dcd6bc;
+  --grid-border-color: #242424;
   /* squares */
   --square-size: 40px;
 	--square-border: 5px solid;
-  --square-border-color: #f5f3eb #bab7a9 #bab7a9 #fff9db;
-  --checked-bg: #cecab7;
-  --checked-border: #9c998d;
+  --square-border-color: #454545 #101010 #353535 #353535;
+  --checked-bg: #111;
+  --checked-border: #1c1c1c;
   /* numbers */
   --one: #e76346;
   --two: #4199d3;
   --three: #57da59;
   --four: #bb41d3;
   --win: var(--one);
+  /* levels */
+  --level: #efefef;
+  --level-selected-border: solid 1px var(--level);
 }
 
-body
-{
+body {
 	height: 100vh;
   font-family: 'Roboto Mono', monospace;
 	background: var(--bg);
 	color: var(--text);
+  margin: 0;
+}
+
+#layout {
+	height: 100vh;
+	display: flex;
+  flex-flow: column wrap;
+
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+
+  text-align: center;
+}
+
+.level {
+  background: var(--level);
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	padding: 8px;
+	font-weight: bold;
+}
+
+.selected {
+	background: var(--bg);
+  color: var(--text);
+  border: var(--level-selected-border);
 }
 
 .grid {
@@ -45,11 +74,18 @@ body
   box-sizing: border-box;
   font-size: var(--numbers-size);
   text-align: center;
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'  width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🪏</text></svg>")
+    16 0,
+  auto;
 }
 
 .grid div.checked {
   border: 2px solid var(--checked-border);
   background: var(--checked-bg);
+}
+
+.grid div.checked, .grid div.flag {
+  cursor: default;
 }
 
 .one {

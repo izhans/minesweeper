@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid')
   const flagsLeft = document.querySelector('#flags-left')
+  const totalFlags = document.querySelector('#total-flags')
   const result = document.querySelector('#result')
   let width = 10
-  let bombAmount = 2
+  let bombAmount = 2 // TODO niveles
   let flags = 0
   let squares = []
   let isGameOver = false
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //create Board
   function createBoard() {
     flagsLeft.innerHTML = bombAmount
+    totalFlags.innerHTML = bombAmount
 
     //get shuffled game array with random bombs
     const bombsArray = Array(bombAmount).fill('bomb')
