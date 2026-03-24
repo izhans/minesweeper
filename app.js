@@ -3,11 +3,26 @@ const flagsLeft = document.querySelector('#flags-left')
 const totalFlags = document.querySelector('#total-flags')
 const result = document.querySelector('#result')
 let width = 10
-let bombAmount = 2 // TODO niveles
 let flags = 0
 let squares = []
 let isGameOver = false
 let shield = false // saves you in case you explode a bomb, deactivates before a use
+
+// levels
+let level = 0
+const levels = [5, 10, 15, 20];
+const levelButtons = document.querySelectorAll(".level")
+levelButtons.forEach(b => b.addEventListener("click", () => setLevel(b)))
+let bombAmount = levels[0]
+
+function setLevel(button) {
+    levelButtons[level].classList.remove("selected")
+    level = button.dataset.level
+    bombAmount = levels[level]
+    grid.innerHTML = ""
+    createBoard()
+    levelButtons[level].classList.add("selected")
+}
 
 // game
 createBoard()
@@ -45,7 +60,7 @@ function createBoard() {
 
     //normal click
     square.addEventListener('click', function(e) {
-      click(square)
+      click(square, false)
     })
 
     //cntrl and left click
@@ -95,10 +110,10 @@ function addFlag(square) {
 }
 
 //click on square actions
-function click(square) {
-  if (isGameOver) return
-  if (square.classList.contains('checked') || square.classList.contains('flag')) return
-  if (square.classList.contains('bomb')) {
+function click(square, expand) {
+  if (isGameOver || square.classList.contains('checked') || square.classList.contains('flag')) return
+
+  if (square.classList.contains('bomb') && !expand) {
     if (shield)
     {
       alert("🥷🏻 beware, there's a bomb")
@@ -151,7 +166,7 @@ function checkSquare(square) {
 
 function clickNewSquare(newId) {
   const newSquare = document.getElementById(squares[newId].id)
-  click(newSquare)
+  click(newSquare, true)
 }
 
 //game over
@@ -174,7 +189,10 @@ function showBombs() {
 function hideBombs() {
   squares.forEach(square => {
     if (square.innerHTML == '💣') {
-      square.innerHTML = ''
+      if (square.classList.contains("flag"))
+        square.innerHTML = ' 🚩'
+      else
+        square.innerHTML = ''
       square.classList.add('bomb')
       square.classList.remove('checked')
     }
