@@ -16,7 +16,8 @@
   --two: #4199d3;
   --three: #57da59;
   --four: #bb41d3;
-  --win: var(--one);
+  --lose: #ff3e12;
+  --win: #ffe600;
   /* levels */
   --level: #efefef;
   --level-selected-border: solid 1px var(--level);
@@ -104,6 +105,10 @@ body {
   color: var(--four);
 }
 
-#result { 
+.win {
   color: var(--win);
+}
+
+.lose {
+  color: var(--lose);
 }

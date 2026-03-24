@@ -171,6 +171,7 @@ function clickNewSquare(newId) {
 
 //game over
 function gameOver() {
+  result.classList.add("lose")
   result.innerHTML = 'BOOM! Game Over!'
   isGameOver = true
   showBombs()
@@ -208,6 +209,7 @@ function checkForWin() {
     if (squares[i].classList.contains('flag') && squares[i].classList.contains('bomb')) {
       matches ++
       if (matches === bombAmount) {
+        result.classList.add("win")
         result.innerHTML = 'YOU WIN!'
         isGameOver = true
         return
