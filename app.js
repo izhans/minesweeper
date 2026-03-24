@@ -7,6 +7,23 @@ let bombAmount = 2 // TODO niveles
 let flags = 0
 let squares = []
 let isGameOver = false
+let shield = false // saves you in case you explode a bomb, deactivates before a use
+
+// game
+createBoard()
+document.addEventListener("keydown", hacks)
+
+// hacks
+function hacks(e) {
+  if (e.key == 'b') {
+    // view all the bombs for a few time
+    showBombs()
+    setTimeout(hideBombs, 300)
+  } else if (e.key == 's') {
+    // activate shield
+    shield = true
+  }
+}
 
 //create Board
 function createBoard() {
@@ -57,7 +74,6 @@ function createBoard() {
     }
   }
 }
-createBoard()
 
 //add Flag with right click
 function addFlag(square) {
@@ -83,7 +99,14 @@ function click(square) {
   if (isGameOver) return
   if (square.classList.contains('checked') || square.classList.contains('flag')) return
   if (square.classList.contains('bomb')) {
-    gameOver(square)
+    if (shield)
+    {
+      alert("🥷🏻 beware, there's a bomb")
+      shield = false
+      return
+    }
+    else
+      gameOver(square)
   } else {
     let total = square.getAttribute('data')
     if (total !=0) {
@@ -99,7 +122,6 @@ function click(square) {
   }
   square.classList.add('checked')
 }
-
 
 //check neighboring squares once square is clicked
 function checkSquare(square) {
@@ -133,11 +155,13 @@ function clickNewSquare(newId) {
 }
 
 //game over
-function gameOver(square) {
+function gameOver() {
   result.innerHTML = 'BOOM! Game Over!'
   isGameOver = true
+  showBombs()
+}
 
-  //show ALL the bombs
+function showBombs() {
   squares.forEach(square => {
     if (square.classList.contains('bomb')) {
       square.innerHTML = '💣'
@@ -147,10 +171,20 @@ function gameOver(square) {
   })
 }
 
+function hideBombs() {
+  squares.forEach(square => {
+    if (square.innerHTML == '💣') {
+      square.innerHTML = ''
+      square.classList.add('bomb')
+      square.classList.remove('checked')
+    }
+  })
+}
+
 //check for win
 function checkForWin() {
   ///simplified win argument
-let matches = 0
+  let matches = 0
 
   for (let i = 0; i < squares.length; i++) {
     if (squares[i].classList.contains('flag') && squares[i].classList.contains('bomb')) {
