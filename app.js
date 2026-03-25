@@ -19,7 +19,7 @@ function setLevel(button) {
     levelButtons[level].classList.remove("selected")
     level = button.dataset.level
     bombAmount = levels[level]
-    grid.innerHTML = ""
+    clearBoard()
     createBoard()
     levelButtons[level].classList.add("selected")
 }
@@ -40,8 +40,19 @@ function hacks(e) {
   }
 }
 
+function clearBoard(params) {
+  grid.innerHTML = ""
+  squares = []
+  flags = 0
+  isGameOver = false
+  result.classList.remove("win")
+  result.classList.remove("lose")
+  result.innerHTML = ''
+}
+
 //create Board
 function createBoard() {
+  console.log("create board", bombAmount)
   flagsLeft.innerHTML = bombAmount
   totalFlags.innerHTML = bombAmount
 
